@@ -73,10 +73,8 @@ export default {
 	.icon.due {
 		background-position: 4px center;
 		border-radius: 3px;
-		margin-top: 9px;
 		margin-bottom: 9px;
 		padding: 3px 4px;
-		padding-right: 0;
 		font-size: 90%;
 		display: flex;
 		align-items: center;

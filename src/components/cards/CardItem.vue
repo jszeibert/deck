@@ -36,6 +36,7 @@
 			</div>
 			<div class="card-upper">
 				<h3 v-if="inlineEditingBlocked">
+					<DueDate v-if="!editing" :card="card" />
 					{{ card.title }}
 				</h3>
 				<h3 v-else-if="!editing"
@@ -44,6 +45,7 @@
 					:aria-label="t('deck', 'Edit card title')"
 					@click.stop="startEditing(card)"
 					@keydown.enter.stop.prevent="startEditing(card)">
+					<DueDate v-if="!editing" :card="card" />
 					{{ card.title }}
 				</h3>
 				<form v-else-if="editing"
@@ -60,8 +62,6 @@
 						pattern=".*\S+.*">
 					<input type="submit" value="" class="icon-confirm">
 				</form>
-
-				<DueDate v-if="!editing" :card="card" />
 
 				<CardMenu v-if="!editing && compactMode" :card="card" class="right" />
 			</div>
@@ -279,7 +279,9 @@ export default {
 	}
 
 	.duedate {
-		margin-right: 9px;
+		float: right;
+		margin-left: 9px;
+		margin-right: -5px;
 	}
 
 	.right {
@@ -308,9 +310,6 @@ export default {
 	.compact {
 		min-height: 44px;
 
-		.duedate {
-			margin-right: 0;
-		}
 		&.has-labels {
 			padding-bottom: $card-padding;
 		}
