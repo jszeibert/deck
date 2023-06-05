@@ -34,6 +34,7 @@
 				<div :style="{backgroundColor: '#' + board.color}" class="board-bullet" />
 				{{ board.title }} » {{ stack.title }}
 			</div>
+			<CardCover v-if="showCardCover" :card-id="card.id" />
 			<div class="card-upper">
 				<h3 v-if="inlineEditingBlocked">
 					{{ card.title }}
@@ -90,11 +91,12 @@ import Color from '../../mixins/color.js'
 import labelStyle from '../../mixins/labelStyle.js'
 import AttachmentDragAndDrop from '../AttachmentDragAndDrop.vue'
 import CardMenu from './CardMenu.vue'
+import CardCover from './CardCover.vue'
 import DueDate from './badges/DueDate.vue'
 
 export default {
 	name: 'CardItem',
-	components: { CardBadges, AttachmentDragAndDrop, CardMenu, DueDate },
+	components: { CardBadges, AttachmentDragAndDrop, CardMenu, DueDate, CardCover },
 	directives: {
 		ClickOutside,
 	},
@@ -127,6 +129,7 @@ export default {
 		...mapState({
 			compactMode: state => state.compactMode,
 			showArchived: state => state.showArchived,
+			showCardCover: state => state.showCardCover,
 			currentBoard: state => state.currentBoard,
 		}),
 		...mapGetters([
