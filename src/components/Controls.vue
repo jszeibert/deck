@@ -203,6 +203,12 @@
 						<ArrowCollapseVerticalIcon slot="icon" :size="20" decorative />
 						{{ t('deck', 'Toggle compact mode') }}
 					</NcActionButton>
+					<NcActionButton @click="toggleShowCardCover">
+						<template #icon>
+							<ImageIcon :size="20" decorative />
+						</template>
+						{{ showCardCover ? t('deck', 'Hide card cover images') : t('deck', 'Show card cover images') }}
+					</NcActionButton>
 				</NcActions>
 				<!-- FIXME: NcActionRouter currently doesn't work as an inline action -->
 				<NcActions>
@@ -222,6 +228,7 @@ import { NcActions, NcActionButton, NcAvatar, NcButton, NcPopover } from '@nextc
 import labelStyle from '../mixins/labelStyle.js'
 import CardCreateDialog from '../CardCreateDialog.vue'
 import ArchiveIcon from 'vue-material-design-icons/Archive.vue'
+import ImageIcon from 'vue-material-design-icons/ImageMultiple.vue'
 import FilterIcon from 'vue-material-design-icons/Filter.vue'
 import FilterOffIcon from 'vue-material-design-icons/FilterOff.vue'
 import ArrowCollapseVerticalIcon from 'vue-material-design-icons/ArrowCollapseVertical.vue'
@@ -239,6 +246,7 @@ export default {
 		NcAvatar,
 		CardCreateDialog,
 		ArchiveIcon,
+		ImageIcon,
 		FilterIcon,
 		FilterOffIcon,
 		ArrowCollapseVerticalIcon,
@@ -279,6 +287,7 @@ export default {
 		]),
 		...mapState({
 			compactMode: state => state.compactMode,
+			showCardCover: state => state.showCardCover,
 			searchQuery: state => state.searchQuery,
 		}),
 		detailsRoute() {
@@ -336,6 +345,9 @@ export default {
 		toggleShowArchived() {
 			this.$store.dispatch('toggleShowArchived')
 			this.showArchived = !this.showArchived
+		},
+		toggleShowCardCover() {
+			this.$store.dispatch('toggleShowCardCover')
 		},
 		addNewStack() {
 			this.stack = { title: this.newStackTitle }
